@@ -1,0 +1,101 @@
+# FastAPI + React ToDo Application
+
+## 📒 Overview
+This repository contains a full-stack ToDo application built with:
+- **Backend:** FastAPI (Python)
+- **Frontend:** React
+- **Authentication:** JWT-based user login
+- **Deployment:** Docker & Docker Compose
+
+Users can log in with pre-existing credentials, manage (create, read, delete) their ToDo items with due dates, and view only their unexpired tasks.
+
+---
+
+## 🚀 Features
+- **JWT Authentication:** Secure login via `/auth/login` endpoint
+- **CRUD Operations:** Create, list, and delete ToDos
+- **In-Memory Storage:** Simplicity for demonstration purposes
+- **Protected Routes:** Frontend routes guarded via React Router
+- **Dockerized:** One-command setup with Docker Compose
+
+---
+
+## 📋 Prerequisites
+Make sure you have the following installed:
+- [Docker](https://www.docker.com/get-started)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+---
+
+## ⚙️ Installation & Running
+1. **Clone the repository**
+   ```bash
+   git clone <this-repo-url>
+   cd <repo-directory>
+   ```
+
+2. **Build and start containers**
+   ```bash
+   docker-compose up --build
+   ```
+
+3. **Access the Application**
+   - Frontend UI: `http://localhost:3000`
+   - FastAPI Docs: `http://localhost:8000/docs`
+
+To stop and clean up containers:
+```bash
+docker-compose down
+```
+
+---
+
+## 🔧 Default Credentials
+Use the following test user to log in:
+- **Email:** `user@example.com`
+- **Password:** `password`
+
+---
+
+## 📁 Project Structure
+```
+├── backend
+│   ├── app
+│   │   ├── main.py         # FastAPI application entrypoint
+│   │   ├── models.py       # Pydantic models
+│   │   └── routers
+│   │       ├── auth.py     # Authentication endpoints
+│   │       └── todos.py    # ToDo CRUD endpoints
+│   ├── Dockerfile
+│   └── requirements.txt
+├── frontend
+│   ├── public
+│   │   └── index.html      # HTML template
+│   ├── src
+│   │   ├── App.js          # Route configuration
+│   │   ├── index.js        # React entrypoint
+│   │   ├── Login.js        # Login component
+│   │   └── Todos.js        # ToDo listing component
+│   ├── Dockerfile
+│   └── package.json
+└── docker-compose.yml
+```
+
+---
+
+## 🔄 API Proxying
+The React dev server proxies API requests to the backend service defined in `package.json`:
+```json
+"proxy": "http://backend:8000"
+```
+
+---
+
+## 📖 Usage Notes
+- The backend uses **in-memory** lists; all data resets on container restart.
+- To modify the code, edit files in `backend/app` or `frontend/src`, then rebuild:
+  ```bash
+  docker-compose up --build
+  ```
+
+---
